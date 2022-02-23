@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arch Guide</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="arch-guide">Arch Guide</h1>
+<p>Easy Arch Install with de/wm :- <a href="https://archlinuxgui.in/">ArchGui</a></p>
+<h2 id="bluetooth">Bluetooth</h2>
+<p>Install-  <code>sudo pacman -S blueman bluez bluez-utils pulseaudio-bluetooth</code><br>
+start- <code>sudo systemctl enable --now bluetooth</code><br>
+restart</p>
+<h1 id="unable-to-mount-hard-drives"><a href="https://askubuntu.com/questions/197556/unable-to-mount-hard-drives">unable to mount hard drives</a></h1>
+<p>Install - <code>sudo pacman -S gvfs ntfs -3g fuse fuse-utils</code><br>
+open terminal -</p>
+<ul>
+<li><code>lsblk</code></li>
+<li><code>sudo mount /dev/'ntfs drive name' /mnt</code></li>
+<li>open root folder, move to /mnt</li>
+</ul>
+</div>
+</body>
+
+</html>

@@ -9,7 +9,24 @@
 </head>
 
 <body class="stackedit">
-  <div class="stackedit__html"><h1 id="arch-guide">Arch Guide</h1>
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#arch-guide">Arch Guide</a>
+<ul>
+<li><a href="#bluetooth">Bluetooth</a></li>
+</ul>
+</li>
+<li><a href="#unable-to-mount-hard-drives">unable to mount hard drives</a></li>
+<li><a href="#slow-download-speed-using-pacman">Slow download speed using pacman</a></li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="arch-guide">Arch Guide</h1>
 <p>Easy Arch Install with de/wm :- <a href="https://archlinuxgui.in/">ArchGui</a></p>
 <h2 id="bluetooth">Bluetooth</h2>
 <p>Install-  <code>sudo pacman -S blueman bluez bluez-utils pulseaudio-bluetooth</code><br>
@@ -23,7 +40,12 @@ open terminal -</p>
 <li><code>sudo mount /dev/'ntfs drive name' /mnt</code></li>
 <li>open root folder, move to /mnt</li>
 </ul>
-</div>
+<h1 id="slow-download-speed-using-pacman"><a href="https://forum.garudalinux.org/t/slow-download-speed-using-pacman/583">Slow download speed using pacman</a></h1>
+<p>Try this, change country if needed</p>
+<p><code>sudo reflector --country India --latest 5 --age 2 --fastest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist</code></p>
+
+    </div>
+  </div>
 </body>
 
 </html>

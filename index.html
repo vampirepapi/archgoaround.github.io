@@ -20,6 +20,13 @@
 </li>
 <li><a href="#unable-to-mount-hard-drives">unable to mount hard drives</a></li>
 <li><a href="#slow-download-speed-using-pacman">Slow download speed using pacman</a></li>
+<li><a href="#i3-gaps-picom-screen-tearing-issue."> i3-gaps picom screen tearing issue.</a></li>
+<li><a href="#thunar-“open-with”-doesn’t-work-for-terminal-applications">Thunar “open with” doesn’t work for terminal applications</a></li>
+<li><a href="#thunar---custom-actions-open-terminal-here-not-working">Thunar - Custom Actions [open terminal here not working]</a>
+<ul>
+<li><a href="#adding-a-custom-action">Adding a Custom Action</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -43,6 +50,46 @@ open terminal -</p>
 <h1 id="slow-download-speed-using-pacman"><a href="https://forum.garudalinux.org/t/slow-download-speed-using-pacman/583">Slow download speed using pacman</a></h1>
 <p>Try this, change country if needed</p>
 <p><code>sudo reflector --country India --latest 5 --age 2 --fastest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist</code></p>
+<h1 id="i3-gaps-picom-screen-tearing-issue."><a href="https://www.reddit.com/r/archlinux/comments/j58isj/i3gaps_picom_screen_tearing_issue/"> i3-gaps picom screen tearing issue.</a></h1>
+<p>add this to i3 config:- <code>exec_always picom --experimental-backends</code></p>
+<h1 id="thunar-“open-with”-doesn’t-work-for-terminal-applications"><a href="https://archived.forum.manjaro.org/t/thunar-open-with-doesnt-work-for-terminal-applications/128863">Thunar “open with” doesn’t work for terminal applications</a></h1>
+<p>I’m not sure if this is a bug, but I can reproduce this behaviour after installing  <code>kitty</code>  and uninstalling  <code>xfce4-terminal</code>.</p>
+<hr>
+<p>To workaround the issue, create the directory  <code>~/.local/share/applications/</code>  (if it doesn’t already exist) and copy the .desktop files of Vim, NeoVim and ranger from  <code>/usr/share/applications/</code>  to this directory.</p>
+<pre><code>cp /usr/share/applications/vim.desktop ~/.local/share/applications/
+cp /usr/share/applications/nvim.desktop ~/.local/share/applications/
+cp /usr/share/applications/ranger.desktop ~/.local/share/applications/
+
+</code></pre>
+<p>Then, open the .desktop files in the  <code>~/.local/share/applications/</code>  directory and replace the line beginning with  <code>Exec</code>  as follows.</p>
+<p>For the  <code>vim.desktop</code>  file:</p>
+<pre><code>Exec=kitty sh -c "vim %F"
+
+</code></pre>
+<p>For the  <code>nvim.desktop</code>  file:</p>
+<pre><code>Exec=kitty sh -c "nvim %F"
+
+</code></pre>
+<p>For the  <code>ranger.desktop</code>  file:</p>
+<pre><code>Exec=kitty sh -c "ranger %f"
+
+</code></pre>
+<p>Also, in all three .desktop files replace this line</p>
+<pre><code>Terminal=true
+
+</code></pre>
+<p>with</p>
+<pre><code>Terminal=false
+
+</code></pre>
+<p>After doing that text files should open in Vim/NeoVim in  <code>kitty</code>  and directories should open in  <code>ranger</code>  using  <code>kitty</code>.</p>
+<hr>
+<p>Another option would be to create three  <a href="https://docs.xfce.org/xfce/thunar/custom-actions">Thunar custom actions  3</a>  using the above mentioned commands in the  <code>Exec</code>  entries of the .desktop files.</p>
+<h1 id="thunar---custom-actions-open-terminal-here-not-working"><a href="https://docs.xfce.org/xfce/thunar/custom-actions#:~:text=Thunar%20allows%20users%20to%20add,item%20in%20the%20Edit%20menu.">Thunar - Custom Actions [open terminal here not working]</a></h1>
+<h2 id="adding-a-custom-action">Adding a Custom Action</h2>
+<p>This section provides a step-by-step introduction to the  <strong>Custom Actions</strong>  plugin, demonstrating how to add a  <strong>Print File</strong>  action, which uses xfprint to print text files. We start by opening the  <strong>Custom Actions</strong>  dialog as explained above. In the dialog, click on the first button in the list of buttons (the one labeled with the  <code>+</code>). The  <strong>Create Action</strong>  dialog will appear, as shown in the screenshot below.</p>
+<p>Create Action Dialog</p>
+<p><img src="https://docs.xfce.org/_media/xfce/thunar/uca-create.png" alt=""></p>
 
     </div>
   </div>

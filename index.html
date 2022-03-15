@@ -27,6 +27,11 @@
 <li><a href="#adding-a-custom-action">Adding a Custom Action</a></li>
 </ul>
 </li>
+<li><a href="#easter-egg-pacman-ilovecandy">Easter egg [pacman ILoveCandy]</a>
+<ul>
+<li><a href="#bashrc-shell-prompt-color-and-icon-change">Bashrc Shell Prompt Color and Icon Change</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -90,6 +95,15 @@ cp /usr/share/applications/ranger.desktop ~/.local/share/applications/
 <p>This section provides a step-by-step introduction to the  <strong>Custom Actions</strong>  plugin, demonstrating how to add a  <strong>Print File</strong>  action, which uses xfprint to print text files. We start by opening the  <strong>Custom Actions</strong>  dialog as explained above. In the dialog, click on the first button in the list of buttons (the one labeled with the  <code>+</code>). The  <strong>Create Action</strong>  dialog will appear, as shown in the screenshot below.</p>
 <p>Create Action Dialog</p>
 <p><img src="https://docs.xfce.org/_media/xfce/thunar/uca-create.png" alt=""></p>
+<h1 id="easter-egg-pacman-ilovecandy">Easter egg [pacman ILoveCandy]</h1>
+<p>Edit  <code>/etc/pacman.conf</code>:</p>
+<p>Under the  <code># Misc options</code>  section, remove the  <code>#</code>  in front of  <code>Color</code>  and add the line  <code>ILoveCandy</code>. Because Pac-Man loves candy.</p>
+<h2 id="bashrc-shell-prompt-color-and-icon-change">Bashrc Shell Prompt Color and Icon Change</h2>
+<p>add the following lines in your .bashrc file &amp; you can get more icon from nerd fonts</p>
+<pre><code>PS1="\[\033[32m\] {icon here without braces} \[\033[37m\]\[\033[34m\]\w \[\033[0m\]"
+PS2="\[\033[32m\]  &gt; \[\033[0m\]"
+</code></pre>
+<p><img src="https://i.ibb.co/hLPwmJP/Tuesday-15-March-2022-06-50-52-PM-IST.jpg" alt="enter image description here"></p>
 
     </div>
   </div>

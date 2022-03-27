@@ -9,37 +9,9 @@
 </head>
 
 <body class="stackedit">
-  <div class="stackedit__left">
-    <div class="stackedit__toc">
-      
-<ul>
-<li><a href="#arch-guide">Arch Guide</a>
-<ul>
-<li><a href="#bluetooth">Bluetooth</a></li>
-</ul>
-</li>
-<li><a href="#unable-to-mount-hard-drives">unable to mount hard drives</a></li>
-<li><a href="#slow-download-speed-using-pacman">Slow download speed using pacman</a></li>
-<li><a href="#i3-gaps-picom-screen-tearing-issue."> i3-gaps picom screen tearing issue.</a></li>
-<li><a href="#thunar-“open-with”-doesn’t-work-for-terminal-applications">Thunar “open with” doesn’t work for terminal applications</a></li>
-<li><a href="#thunar---custom-actions-open-terminal-here-not-working">Thunar - Custom Actions [open terminal here not working]</a>
-<ul>
-<li><a href="#adding-a-custom-action">Adding a Custom Action</a></li>
-</ul>
-</li>
-<li><a href="#easter-egg-pacman-ilovecandy">Easter egg [pacman ILoveCandy]</a>
-<ul>
-<li><a href="#bashrc-shell-prompt-color-and-icon-change">Bashrc Shell Prompt Color and Icon Change</a></li>
-</ul>
-</li>
-</ul>
-
-    </div>
-  </div>
-  <div class="stackedit__right">
-    <div class="stackedit__html">
-      <h1 id="arch-guide">Arch Guide</h1>
-<p>Easy Arch Install with de/wm :- <a href="https://archlinuxgui.in/">ArchGui</a></p>
+  <div class="stackedit__html"><h1 id="arch-guide">Arch Guide</h1>
+<p>Easy Arch Install with de/wm :- <a href="https://archlinuxgui.in/">ArchGui</a><br>
+Installation Guide:-</p>
 <h2 id="bluetooth">Bluetooth</h2>
 <p>Install-  <code>sudo pacman -S blueman bluez bluez-utils pulseaudio-bluetooth</code><br>
 start- <code>sudo systemctl enable --now bluetooth</code><br>
@@ -104,9 +76,35 @@ cp /usr/share/applications/ranger.desktop ~/.local/share/applications/
 PS2="\[\033[32m\]  &gt; \[\033[0m\]"
 </code></pre>
 <p><img src="https://i.ibb.co/hLPwmJP/Tuesday-15-March-2022-06-50-52-PM-IST.jpg" alt="enter image description here"></p>
+<p><strong>[Cool]</strong></p>
+<pre><code>function myPrompt {
+#Let's define colors
+local RED="\[\033[31m\]"
+local GREEN="\[\033[32m\]"
+local BROWN="\[\033[33m\]"
+local BLUE="\[\033[34m\]"
+local PINK="\[\033[35m\]"
+local CYAN="\[\033[36m\]"
+local WHITE="\[\033[37m\]"
+local REDBG="\[\033[41m\]"
+local GREENBG="\[\033[42m\]"
+local BROWNBG="\[\033[43m\]"
+local BLUEBG="\[\033[44m\]"
+local PINKBG="\[\033[45m\]"
+local CYANBG="\[\033[46m\]"
+local RESETCOL="\[\033[0m\]"
 
-    </div>
-  </div>
+#And here is the prompt!
+# PS1="\[\033(0\]lq\[\033(B\]\\u: \\w \n\\[\033(0\]mq\[\033(B\] "
+PS1="\[\033(0\]lq\[\033(B\]\
+$REDBG$PINK░▒▓█$WHITE$PINKBG\u: \
+$PINK$CYANBG$RED$CYANBG \w $RED$CYAN\n$RESETCOL\
+\[\033(0\]mq\[\033(B\] "
+}
+myPrompt
+unset myPrompt
+</code></pre>
+</div>
 </body>
 
 </html>

@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base_Install</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="this-is-for-arch-base-installation-with-dwm--i3wm-and-st">This is for Arch Base Installation with DWM / i3wm and ST</h1>
+<h4 id="lets-start-with-wifi-connection-and-checking-internet-connection"><strong>Lets start with wifi connection and checking internet connection</strong></h4>
+<pre><code>iwctl
+help
+device list
+station [_device_name_] scan
+station [_device_name_] get-networks
+station [_device_name_] connect [_SSID_] {type passphrase}
+station [_device_name_] show {will show device status}
+</code></pre>
+<p><strong>now ping</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh">ping 8.8.8.8
+</code></pre>
+<p><strong>Now set the time and date</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh">timedatectl set-ntp true
+timedatectl status
+</code></pre>
+<p><strong>Lets make partations</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh"># list the partations
+fdisk -l
+
+# now open the disk in fdisk, in my case 
+fdisk /dev/nvme0n1
+
+# now make 3 partations
+# First of 512 MB as EFI partations
+# Second of 2GB as linux swap
+# And remaing as Linux Filesystem
+</code></pre>
+<p>Demo output of partationing</p>
+<blockquote>
+<p>To be done</p>
+</blockquote>
+<p><strong>Lets format partations</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh"># format efi disk as fat32
+mkfs.fat -F32 /dev/{efi-partation}
+
+# format swap partation
+mkswap /dev/{swap-partation}
+
+# make use of swapt partation
+swapon /dev/{swap-partation}
+
+# format linux filesystem partation as ext4
+mkfs.ext4 /dev/{linux-filesystem-partation}
+</code></pre>
+<p><strong>Make use of the partations by mounting them</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh"># Mount the Linux Filesystem partation of drive to /mnt dir of boot environment
+mount /dev/{linux-filesystem-partation} /mnt
+
+# Make a boot directory in the linux filesystem partation mount the efi partation in the boot dir.
+mkdir /mnt/boot
+mount /dev/{efi-partation} /mnt/boot
+
+# confirm the partation and mounting
+df
+</code></pre>
+<p><strong>Base Linux firmware installaion</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh">pacstrap /mnt base linux linux-firmware
+genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+
+# chcek the fstab
+vim /mnt/etc/fstab
+</code></pre>
+<p><strong>Now lets change root to the installed arch</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh">arch-chroot /mnt
+</code></pre>
+<p><strong>Set the locale and timezone</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh"># Install vim first
+pacman -Sy vim
+
+# Now do the locae stuff
+ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+hwclock --systohc
+vim /etc/locale.gen    # uncomment en_US.UTF-8 UTF-8
+locale-gen             # Generate the locale file
+</code></pre>
+<p><strong>Set hostname and hosts</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh">echo arch &gt; /etc/hostname
+vim /etc/hosts
+# and add following
+"
+127.0.0.1       localhost
+::1             localhost
+127.0.0.1       arch.localdomain        arch
+"
+</code></pre>
+<p><strong>Change the password</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh">passwd
+</code></pre>
+<p><strong>Install GRUB and dual boot</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh"># Havent added comment for the commands cuz I also barely know what they do 😅
+
+pacman -Sy grub efibootmgr os-prober
+os-prober
+grub-install --target=x86-64_efi --efi-directory=/boot/ --bootloader-id=GRUB
+mkdir /mnt2
+mount /dev/{windows-efi-partation} /mnt2
+grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre>
+<p><strong>Install network manager</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh">pacman -S dhcpcd
+</code></pre>
+<h2 id="reboot">Reboot</h2>
+<pre class=" language-sh"><code class="prism  language-sh"># exit from arch-chroot
+exit
+
+# now reboot
+reboot
+</code></pre>
+<p><strong>Now add a new user and add to sudo group</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh"># Install sudo
+pacman -S sudo
+
+# Add a new user and create home dir for him
+useradd -m vampirepapi
+
+# change password for the new user
+passwd {type_password}
+
+# Add the new user to some group includeing sudo
+usermod -aG wheel,audio,video,storage,dialout vampirepapi
+
+# Now make the sudo execute command with root previleges
+visudo # uncomment "%wheel ALL=(ALL) ALL" and "%sudo   ALL=(ALL) ALL"
+</code></pre>
+</div>
+</body>
+
+</html>

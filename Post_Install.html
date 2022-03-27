@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post_Install</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h2 id="the-post-installation-after-base-install">The Post installation after Base install</h2>
+<p><strong>Login to new user created</strong></p>
+<p><strong>First enable and start the dhcpcd service</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh">sudo systemctl enable --now dhcpcd
+</code></pre>
+<p><strong>Now install some absolute important packages</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh">sudo pacman -Sy base-devel git firefox wget nvidia nvidia-settings unzip
+</code></pre>
+<p><strong>Install some display and audio packages</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh"># Install the packages
+sudo pacman -Sy alsa-utils pulseaudio xorg-server xorg-xinit libx11 libxinerama libxft webkit2gtk
+
+# Start the pulse audio service
+systemctl --user enable pulseaudio
+</code></pre>
+<p><strong>dwm / i3wm installation &amp; setup</strong><br>
+<em>for dwm siduck got the best looking dwm i’m simply putting the github repo link {cause this is too much time consuimg after setting chadwm we can customise it according to our needs</em><br>
+<a href="https://github.com/siduck/chadwm">https://github.com/siduck/chadwm</a></p>
+<h3 id="install-i3">1. Install i3</h3>
+<p>Type the following command in the terminal:</p>
+<pre><code>$ sudo pacman -S i3blocks polybar lightdm lightdm-gtk-greeter
+</code></pre>
+<p>When it asks which packages to install, showing the possible options, only hit enter and it will install all the necessary ones.</p>
+<h3 id="edit-xinitrc">2. Edit Xinitrc</h3>
+<p>Type the following command in the terminal:</p>
+<pre><code>$ echo "exec i3" &gt;&gt; ~/.xinitrc
+</code></pre>
+<p>If you have another window manager or desktop environment installed, you may be able to choose i3 as a window manager via the desktop manager.</p>
+<p>If you don’t have a desktop manager to choose i3, or you want it as your unique window manager, remove or comment the lines of the other window managers/desktop environments installed in your system. They are placed in Xinitrc too.</p>
+<h3 id="install-xorg">3. Install Xorg</h3>
+<pre><code>$ sudo pacman -S xorg-server xorg-xinit
+</code></pre>
+<h3 id="start-i3">4. Start i3</h3>
+<pre><code>$ startx
+</code></pre>
+<p><strong>now configurations</strong><br>
+clone my dotfiles</p>
+<pre><code>https://github.com/vampirepapi/dotfiles.git
+</code></pre>
+<p>you can setup i3wm nvim polybar bashrc and manymore things using that dot files</p>
+<p><strong>Install the rest of the pacman and aur packages</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh">sudo pacman -S bat bpython cmake cmatrix discord dmenu dunst evince exa ffmpeg figlet firefox gcc gimp grep htop imagemagick kitty lolcat maim neofetch nitrogen npm nvtop obs-studio picom playerctl ranger telegram-desktop v4l-utils vlc openssh noto-fonts-emoji python-pillow gnome-boxes spice-vagent
+
+sudo pacman -S python-pip tk xclip xorg-xsetroot neovim lazygit testdisk
+
+sudo pacman -S lxappearance-gtk3
+
+paru -S brave-bin ccrypt spofity visual-studio-code-bin gotop 
+
+</code></pre>
+<p><strong>Install nerd fornt</strong><br>
+<a href="https://aur.archlinux.org/packages/nerd-fonts-complete">https://aur.archlinux.org/packages/nerd-fonts-complete</a></p>
+<p><strong>Install Everblush GTK theme</strong></p>
+<pre class=" language-sh"><code class="prism  language-sh">git clone https://github.com/mangeshrex/Everblush-gtk &amp;&amp; cd Everblush-gtk
+npm install -g scss 
+sudo make install
+</code></pre>
+<h3 id="now-you-can-reboot-and-do-the-zsh-and-vim-config">Now you can reboot and do the ZSH and VIM config</h3>
+<p>for bashrc go for <a href="https://starship.rs/">starship prompt</a><br>
+for nvim go for <a href="https://nvchad.github.io/getting-started/setup">nvchad</a></p>
+</div>
+</body>
+
+</html>

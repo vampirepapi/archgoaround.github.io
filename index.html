@@ -40,6 +40,8 @@
 </ul>
 </li>
 <li><a href="#solved-laptop-not-suspending-on-lid-close">[SOLVED] Laptop not suspending on lid close</a></li>
+<li><a href="#hiqh-quality-screen-shots-i3wm">Hiqh Quality Screen Shots i3wm</a></li>
+<li><a href="#vmware-horizon-client">VMWare Horizon Client</a></li>
 </ul>
 </li>
 </ul>
@@ -163,6 +165,33 @@ background=/usr/share/pixmaps/black_and_white_photography-wallpaper-1920x1080.jp
 <li>hit <code>sudo /etc/systemd/logind.conf</code></li>
 <li>Try uncommenting it and explicitely setting its value:- <code>HandleLidSwitch=suspend</code> &amp;&amp; <code>HandleLidSwitchDocked=suspend</code></li>
 </ol>
+<h2 id="hiqh-quality-screen-shots-i3wm"><a href="https://www.scantips.com/basics09.html">Hiqh Quality Screen Shots i3wm</a></h2>
+<p><em><strong>tldr:</strong></em> jpg are use low compression, use png for hq images</p>
+<p>add these line in your i3 config file</p>
+<pre><code>bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date).png"
+
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date).png"
+
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date).png"
+</code></pre>
+<h2 id="vmware-horizon-client"><a href="https://warlord0blog.wordpress.com/2021/01/18/vmware-horizon-client-manjaro/">VMWare Horizon Client</a></h2>
+<p>AUR has Horizon client  package here: <a href="https://aur.archlinux.org/packages/vmware-horizon-client/">https://aur.archlinux.org/packages/vmware-horizon-client/</a></p>
+<pre><code>git clone https://aur.archlinux.org/vmware-horizon-client.git
+cd vmware-horizon-client
+makepkg -si
+</code></pre>
+<p>This failed as it was missing a dependency  <code>vmware-keymaps</code>. It does say it’s a dependency on the AUR page.</p>
+<p>Now it’s just a case of grabbing that package and making and installing it first.  <a href="https://aur.archlinux.org/packages/vmware-keymaps/">https://aur.archlinux.org/packages/vmware-keymaps/</a></p>
+<pre><code>cd ..
+git clone https://aur.archlinux.org/vmware-keymaps.git
+cd vmware-keymaps
+makepkg -si
+</code></pre>
+<p>Then back to install the client:</p>
+<pre><code>cd ../vmware-horizon-client
+makepkg -si
+</code></pre>
+<p>Voila !!! Vmware - Horizon - Client is installed.</p>
 
     </div>
   </div>

@@ -42,6 +42,8 @@
 <li><a href="#solved-laptop-not-suspending-on-lid-close">[SOLVED] Laptop not suspending on lid close</a></li>
 <li><a href="#hiqh-quality-screen-shots-i3wm">Hiqh Quality Screen Shots i3wm</a></li>
 <li><a href="#vmware-horizon-client">VMWare Horizon Client</a></li>
+<li><a href="#solved-font-really-small-in-i3-window-manager">[SOLVED] Font really small in i3 window manager</a></li>
+<li><a href="#how-to-install-aur-packages">How to install AUR Packages</a></li>
 </ul>
 </li>
 </ul>
@@ -70,6 +72,13 @@ open terminal -</p>
 <h1 id="slow-download-speed-using-pacman"><a href="https://forum.garudalinux.org/t/slow-download-speed-using-pacman/583">Slow download speed using pacman</a></h1>
 <p>Try this, change country if needed</p>
 <p><code>sudo reflector --country India --latest 5 --age 2 --fastest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist</code></p>
+<p>if India’s mirrors are down go for default mirrorlist.<br>
+or try this -</p>
+<pre><code>sudo reflector --latest 100 --age 6 --fastest 20 --threads 20 --save /etc/pacman.d/mirrorlist --verbose --sort rate
+</code></pre>
+<p>or,</p>
+<pre><code>sudo reflector --latest 5 --age 24 --fastest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+</code></pre>
 <h1 id="i3-gaps-picom-screen-tearing-issue."><a href="https://www.reddit.com/r/archlinux/comments/j58isj/i3gaps_picom_screen_tearing_issue/"> i3-gaps picom screen tearing issue.</a></h1>
 <p>add this to i3 config:- <code>exec_always picom --experimental-backends</code></p>
 <h1 id="thunar-“open-with”-doesn’t-work-for-terminal-applications"><a href="https://archived.forum.manjaro.org/t/thunar-open-with-doesnt-work-for-terminal-applications/128863">Thunar “open with” doesn’t work for terminal applications</a></h1>
@@ -192,6 +201,20 @@ makepkg -si
 makepkg -si
 </code></pre>
 <p>Voila !!! Vmware - Horizon - Client is installed.</p>
+<h2 id="solved-font-really-small-in-i3-window-manager"><strong><a href="https://bbs.archlinux.org/viewtopic.php?id=159098">[SOLVED] Font really small in i3 window manager</a></strong></h2>
+<ul>
+<li>Use some gtk2 config tool like lxappearance to change the font.</li>
+<li>change font size in <code>~/.gtkrc-2.0</code> &amp; in  <code>~/.config/gtk-3.0/settings.ini</code>  and dont forget to <code>restart the laptop ⚠️</code></li>
+<li>try to change dpi settings <code>xrandr --dpi 184</code></li>
+</ul>
+<h2 id="how-to-install-aur-packages">How to install AUR Packages</h2>
+<ul>
+<li>Copy Git Clone URL</li>
+<li>open a new terminal</li>
+<li>type <code>git clone {your pkg url}</code></li>
+<li>type<code>cd {your pkg name}</code></li>
+<li>enter <code>makepkg -si</code></li>
+</ul>
 
     </div>
   </div>
